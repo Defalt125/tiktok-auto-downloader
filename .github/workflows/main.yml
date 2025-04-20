@@ -1,24 +1,24 @@
 name: TikTok Auto-Download
-   on:
-     schedule:
-       - cron: '*/30 * * * *'  
-   jobs:
-     download:
-       runs-on: ubuntu-latest
-       steps:
-         - uses: actions/checkout@v2
-         - name: Set up Python
-           uses: actions/setup-python@v2
-           with:
-             python-version: '3.9'
-         - name: Install dependencies
-           run: |
-             pip install yt-dlp
-         - name: Run script
-           run: |
-             python tiktok_downloader.py
-         - name: Upload videos
-           uses: actions/upload-artifact@v2
-           with:
-             name: tiktok-videos
-             path: videos/  
+on:
+  schedule:
+    - cron: '*/10 * * * *'
+jobs:
+  download:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'
+      - name: Install dependencies
+        run: |
+          pip install yt-dlp
+      - name: Run script
+        run: |
+          python tiktok_downloader.py
+      - name: Upload videos
+        uses: actions/upload-artifact@v2
+        with:
+          name: tiktok-videos
+          path: videos/
